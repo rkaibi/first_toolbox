@@ -51,8 +51,8 @@ jobs:
          make install test clean
 
       strategy:
-        matrix:
-         python-version: [3.7]
+      matrix:
+      python-version: [3.7]
 
   # # 🤖 CD paragraph
   # #
