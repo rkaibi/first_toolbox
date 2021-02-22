@@ -9,7 +9,6 @@ numpy
 pandas
 scikit-learn
 nltk
-string
 
 # tests/linter
 black
