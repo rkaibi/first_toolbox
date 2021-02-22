@@ -1,10 +1,20 @@
 import string
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.decomposition import LatentDirichletAllocation
 from sklearn.feature_extraction.text import TfidfVectorizer
-
+try:
+    nltk.data.find('punkt')
+    nltk.data.find('stopwords')
+    nltk.data.find('averaged_perceptron_tagger')
+    nltk.data.find('wordnet')
+except LookupError:
+    nltk.download('punkt', quiet=True)
+    nltk.download('stopwords', quiet=True)
+    nltk.download('averaged_perceptron_tagger', quiet=True)
+    nltk.download('wordnet', quiet=True)
 
 stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
