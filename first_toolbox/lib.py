@@ -25,10 +25,17 @@ def print_topics(model, vectorizer):
         print([(vectorizer.get_feature_names()[i],topic[i])
                 for i in topic.argsort()[:-10 - 1:-1]])
 
-def make_prediction(data, n_topics):
+def make_model(data, n_topics):
     data['clean_text'] = data['text'].apply(pre_proc)
     vectorizer = TfidfVectorizer().fit(data['clean_text'])
     data_vectorized = vectorizer.transform(data['clean_text'])
     lda_model = LatentDirichletAllocation(n_components=n_topics).fit(data_vectorized)
 
-    return print_topics(lda_model, vectorizer)
+    return lda_model
+
+def make_pred(data, n_topics, example):
+    model = make_model(data, n_topics)
+    vectorizer = TfidfVectorizer().fit(data['clean_text'])
+    example_vectorized = vectorizer.transform(example)
+
+    return model.transform(example_vectorized)
